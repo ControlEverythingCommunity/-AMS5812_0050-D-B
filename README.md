@@ -1,0 +1,39 @@
+[![AMS5812_I2CS_0050-D-B](AMS5812_I2CS_0050-D-B.png)](https://www.controleverything.com/content/Pressure?sku=AMS5812_I2CS_0050-D-B)
+# AMS5812_I2CS_0050-D-B
+AMS5812-0050-D-B Amplified Pressure Sensor 
+
+The AMS5812-0050-D-B is a high-precision OEM pressure Sensor.
+
+This Device is available from ControlEverything.com [SKU: AMS5812_I2CS_0050-D-B]
+
+https://www.controleverything.com/content/Pressure?sku=AMS5812_I2CS_0050-D-B
+
+This Sample code can be used with Raspberry pi and Arduino.
+
+## Java
+Download and install pi4j library on Raspberry pi. Steps to install pi4j are provided at:
+
+http://pi4j.com/install.html
+
+Download (or git pull) the code in pi.
+
+Compile the java program.
+```cpp
+$> pi4j AMS5812.java
+```
+
+Run the java program.
+```cpp
+$> pi4j AMS5812
+```
+
+## Arduino
+Download and install Arduino Software (IDE) on your machine. Steps to install Arduino are provided at:
+
+https://www.arduino.cc/en/Main/Software
+
+Download (or git pull) the code and double click the file to run the program.
+
+Compile and upload the code on Arduino IDE and see the output on Serial Monitor.
+
+#####The code output is the pressure in PSI.
