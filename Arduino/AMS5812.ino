@@ -11,58 +11,48 @@
 
 void setup()
 {
-// Initialise I2C communication as MASTER
-Wire.begin();
-// Initialise serial communication, set baud rate = 9600
-Serial.begin(9600);
-
-// Start I2C transmission
-Wire.beginTransmission(Addr);
-// Stop I2C transmission
-Wire.endTransmission();
-delay(300);
+  // Initialise I2C communication as MASTER
+  Wire.begin();
+  // Initialise serial communication, set baud rate = 9600
+  Serial.begin(9600);
+  delay(300);
 }
 
 void loop()
 {
-unsigned int data[4];
+  unsigned int data[4];
+  delay(500);
 
-// Start I2C transmission
-Wire.beginTransmission(Addr);
-// Stop I2C transmission
-Wire.endTransmission();
-delay(500);
+  // Request 4 bytes of data
+  Wire.requestFrom(Addr, 4);
 
-// Request 4 bytes of data
-Wire.requestFrom(Addr, 4);
+  // Read 4 bytes of data
+  // pressure msb, pressure lsb, temp msb, temp lsb
+  if (Wire.available() == 4)
+  {
+    data[0] = Wire.read();
+    data[1] = Wire.read();
+    data[2] = Wire.read();
+    data[3] = Wire.read();
+  }
 
-// Read 4 bytes of data
-// pressure msb, pressure lsb, temp msb, temp lsb
-if (Wire.available() == 4)
-{
-data[0] = Wire.read();
-data[1] = Wire.read();
-data[2] = Wire.read();
-data[3] = Wire.read();
-}
+  // Convert the data
+  float pressure = ((data[0] & 0xFF) * 256 + (data[1] & 0xFF));
+  float temp = ((data[2] & 0xFF) * 256 + (data[3] & 0xFF));
 
-// Convert the data
-float pressure = ((data[0] & 0xFF) * 256 + (data[1] & 0xFF));
-float temp = ((data[2] & 0xFF) * 256 + (data[3] & 0xFF));
+  pressure = ((pressure - 3277.0) / ((26214.0) / 10.0)) - 5.0;
+  float cTemp = ((temp - 3277.0) / ((26214.0) / 110.0)) - 25.0;
+  float fTemp = (cTemp * 1.8 ) + 32;
 
-pressure = ((pressure - 3277.0) / ((26214.0) / 10.0)) - 5.0;
-float cTemp = ((temp - 3277.0) / ((26214.0) / 110.0)) - 25.0;
-float fTemp = (cTemp * 1.8 ) + 32;
-
-// Output data to serial monitor
-Serial.print("Pressure : ");
-Serial.print(pressure);
-Serial.println(" PSI");
-Serial.print("Temperature in Celsius : ");
-Serial.print(cTemp);
-Serial.println(" C");
-Serial.print("Temperature in Fahrenheit : ");
-Serial.print(fTemp);
-Serial.println(" F");
-delay(500);
+  // Output data to serial monitor
+  Serial.print("Pressure : ");
+  Serial.print(pressure);
+  Serial.println(" PSI");
+  Serial.print("Temperature in Celsius : ");
+  Serial.print(cTemp);
+  Serial.println(" C");
+  Serial.print("Temperature in Fahrenheit : ");
+  Serial.print(fTemp);
+  Serial.println(" F");
+  delay(500);
 }
