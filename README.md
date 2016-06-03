@@ -8,7 +8,7 @@ This Device is available from ControlEverything.com [SKU: AMS5812_I2CS_0050-D-B]
 
 https://www.controleverything.com/content/Pressure?sku=AMS5812_I2CS_0050-D-B
 
-This Sample code can be used with Raspberry pi and Arduino.
+This Sample code can be used with Raspberry pi, Arduino and Beaglebone Black.
 
 ## Java
 Download and install pi4j library on Raspberry pi. Steps to install pi4j are provided at:
@@ -49,5 +49,16 @@ Verify and flash the code on your Photon. Code output is shown in logs at dashbo
 
 https://dashboard.particle.io/user/logs
 
+## C
 
+Download (or git pull) the code in Beaglebone Black.
+
+Compile the c program.
+```cpp
+$>gcc TMD2771.c -o TMD2771
+```
+Run the c program.
+```cpp
+$>./TMD2771
+```
 #####The code output is the pressure in PSI.
