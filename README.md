@@ -55,10 +55,10 @@ Download (or git pull) the code in Beaglebone Black.
 
 Compile the c program.
 ```cpp
-$>gcc TMD2771.c -o TMD2771
+$>gcc AMS5812.c -o AMS5812
 ```
 Run the c program.
 ```cpp
-$>./TMD2771
+$>./AMS5812
 ```
 #####The code output is the pressure in PSI.
