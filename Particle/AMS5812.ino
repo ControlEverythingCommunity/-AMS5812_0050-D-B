@@ -10,7 +10,7 @@
 // AMS5812 I2C address is 0x78(120)
 #define Addr 0x78
 
-float pressure = 0.0, cTemp = 0.0, fTemp = 0.0;
+double pressure = 0.0, cTemp = 0.0, fTemp = 0.0;
 unsigned long ptemp, temp;
 void setup()
 {
@@ -54,9 +54,9 @@ fTemp = (cTemp * 1.8 ) + 32;
 
 // Output data to dashboard
 Particle.publish("Temperature in Celsius :", String(cTemp));
-delay(500);
+delay(1000);
 Particle.publish("Temperature in Fahrenheit : ", String(fTemp));
-delay(500);
+delay(1000);
 Particle.publish("Pressure in PSI: ", String(pressure));
-delay(500);
+delay(1000);
 }
